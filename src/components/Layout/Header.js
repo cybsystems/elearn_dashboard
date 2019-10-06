@@ -1,33 +1,9 @@
-import Avatar from 'components/Avatar';
-import { UserCard } from 'components/Card';
-import Notifications from 'components/Notifications';
 import SearchInput from 'components/SearchInput';
-import { notificationsData } from 'demos/header';
+
 import withBadge from 'hocs/withBadge';
 import React from 'react';
-import {
-  MdClearAll,
-  MdExitToApp,
-  MdHelp,
-  MdInsertChart,
-  MdMessage,
-  MdNotificationsActive,
-  MdNotificationsNone,
-  MdPersonPin,
-  MdSettingsApplications,
-} from 'react-icons/md';
-import {
-  Button,
-  ListGroup,
-  ListGroupItem,
-  // NavbarToggler,
-  Nav,
-  Navbar,
-  NavItem,
-  NavLink,
-  Popover,
-  PopoverBody,
-} from 'reactstrap';
+import { MdClearAll, MdNotificationsActive } from 'react-icons/md';
+import { Button, Nav, Navbar } from 'reactstrap';
 import bn from 'utils/bemnames';
 
 const bem = bn.create('header');
@@ -77,7 +53,17 @@ class Header extends React.Component {
 
   render() {
     return (
-      <Navbar light expand className={bem.b('bg-white')} style={{position:'fixed',zIndex:1,width:'100%',paddingBottom:25}}>
+      <Navbar
+        light
+        expand
+        className={bem.b('bg-white')}
+        style={{
+          position: 'fixed',
+          zIndex: 1,
+          width: '100%',
+          paddingBottom: 25,
+        }}
+      >
         <Nav navbar className="mr-2">
           <Button outline onClick={this.handleSidebarControlButton}>
             <MdClearAll size={25} />
@@ -86,8 +72,6 @@ class Header extends React.Component {
         <Nav navbar>
           <SearchInput />
         </Nav>
-
-         
       </Navbar>
     );
   }
