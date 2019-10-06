@@ -1,57 +1,19 @@
 import React from 'react';
-import { MdDashboard, MdWeb, MdRadioButtonChecked } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import { Nav, Navbar, NavItem, NavLink as BSNavLink } from 'reactstrap';
 import bn from 'utils/bemnames';
 import CollapseAbleNavItem from '../../elearnComponents/CollapseAbleNavItem';
-
-const navComponentsStudent = [
-  {
-    to: '/student',
-    name: 'All Students ',
-    exact: false,
-    Icon: MdRadioButtonChecked,
-  },
-  {
-    to: '/add_student',
-    name: 'Add Student',
-    exact: false,
-    Icon: MdRadioButtonChecked,
-  },
-];
-
-const navComponentsResource = [
-  {
-    to: '/resource',
-    name: 'All Resources ',
-    exact: false,
-    Icon: MdRadioButtonChecked,
-  },
-  {
-    to: '/add_resource',
-    name: 'Add Resource',
-    exact: false,
-    Icon: MdRadioButtonChecked,
-  },
-];
-
-const navItems = [
-  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-];
+import { navItems, navComponentsResource, navComponentsStudent } from './utils';
 
 const bem = bn.create('sidebar');
 
 class Sidebar extends React.Component {
   state = {
-    isOpenComponents: false,
-    isOpenContents: true,
-    isOpenPages: true,
     currentTitle: '',
   };
 
   onNavItemToggle = title => {
     const { currentTitle } = this.state;
-
     this.setState({ currentTitle: currentTitle === title ? '' : title });
   };
 
