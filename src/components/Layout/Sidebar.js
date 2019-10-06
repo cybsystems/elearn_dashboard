@@ -1,23 +1,11 @@
 import React from 'react';
-import {
-  MdDashboard,
-  MdWeb,
-  MdKeyboardArrowDown,
-  MdExtension,
-  MdRadioButtonChecked,
-  MdGroupWork,
-} from 'react-icons/md';
+import { MdDashboard, MdWeb, MdRadioButtonChecked } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
-import {
-  Collapse,
-  Nav,
-  Navbar,
-  NavItem,
-  NavLink as BSNavLink,
-} from 'reactstrap';
+import { Nav, Navbar, NavItem, NavLink as BSNavLink } from 'reactstrap';
 import bn from 'utils/bemnames';
+import CollapseAbleNavItem from '../../elearnComponents/CollapseAbleNavItem';
 
-const navComponents = [
+const navComponentsStudent = [
   {
     to: '/student',
     name: 'All Students ',
@@ -32,9 +20,23 @@ const navComponents = [
   },
 ];
 
+const navComponentsResource = [
+  {
+    to: '/resource',
+    name: 'All Resources ',
+    exact: false,
+    Icon: MdRadioButtonChecked,
+  },
+  {
+    to: '/add_resource',
+    name: 'Add Resource',
+    exact: false,
+    Icon: MdRadioButtonChecked,
+  },
+];
+
 const navItems = [
   { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-  { to: '/resource', name: 'Resources', exact: false, Icon: MdWeb },
 ];
 
 const bem = bn.create('sidebar');
@@ -44,19 +46,18 @@ class Sidebar extends React.Component {
     isOpenComponents: false,
     isOpenContents: true,
     isOpenPages: true,
+    currentTitle: '',
   };
 
-  handleClick = name => () => {
-    this.setState(prevState => {
-      const isOpen = prevState[`isOpen${name}`];
+  onNavItemToggle = title => {
+    const { currentTitle } = this.state;
 
-      return {
-        [`isOpen${name}`]: !isOpen,
-      };
-    });
+    this.setState({ currentTitle: currentTitle === title ? '' : title });
   };
 
   render() {
+    const { currentTitle } = this.state;
+
     return (
       <aside className={bem.b()}>
         <div className={bem.e('content')}>
@@ -82,45 +83,18 @@ class Sidebar extends React.Component {
               </NavItem>
             ))}
 
-            <NavItem
-              className={bem.e('nav-item')}
-              onClick={this.handleClick('Components')}
-            >
-              <BSNavLink className={bem.e('nav-item-collapse')}>
-                <div className="d-flex">
-                  <MdExtension className={bem.e('nav-item-icon')} />
-                  <span className=" align-self-start">Students</span>
-                </div>
-                <MdKeyboardArrowDown
-                  className={bem.e('nav-item-icon')}
-                  style={{
-                    padding: 0,
-                    transform: this.state.isOpenComponents
-                      ? 'rotate(0deg)'
-                      : 'rotate(-90deg)',
-                    transitionDuration: '0.3s',
-                    transitionProperty: 'transform',
-                  }}
-                />
-              </BSNavLink>
-            </NavItem>
-            <Collapse isOpen={this.state.isOpenComponents}>
-              {navComponents.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
-                  <BSNavLink
-                    id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
-                    tag={NavLink}
-                    to={to}
-                    activeClassName="active"
-                    exact={exact}
-                  >
-                    <Icon className={bem.e('nav-item-icon')} />
-                    <span className="">{name}</span>
-                  </BSNavLink>
-                </NavItem>
-              ))}
-            </Collapse>
+            <CollapseAbleNavItem
+              title="Students"
+              onNavItemToggle={this.onNavItemToggle}
+              isOpen={currentTitle === 'Students'}
+              navComponents={navComponentsStudent}
+            />
+            <CollapseAbleNavItem
+              title="Resources"
+              onNavItemToggle={this.onNavItemToggle}
+              isOpen={currentTitle === 'Resources'}
+              navComponents={navComponentsResource}
+            />
           </Nav>
         </div>
       </aside>

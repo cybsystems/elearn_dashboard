@@ -7,6 +7,7 @@ import './styles/reduction.scss';
 import StudentManagent from './elearnPages/StudentManagment';
 import ResourceManagement from './elearnPages/ResourceManagement';
 import AddStudentPage from './elearnPages/students/AddStudentPage';
+import AddResourcePage from './elearnPages/resources/AddResourcePage';
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
 
 const getBasename = () => {
@@ -24,6 +25,7 @@ class App extends React.Component {
               <Route exact path="/student" component={StudentManagent} />
               <Route exact path="/resource" component={ResourceManagement} />
               <Route exact path="/add_student" component={AddStudentPage} />
+              <Route exact path="/add_resource" component={AddResourcePage} />
             </React.Suspense>
           </MainLayout>
           <Redirect to="/" />
