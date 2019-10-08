@@ -26,10 +26,13 @@ const Page = ({
             {title}
           </h1>
         ) : (
-            title
-          )}
+          title
+        )}
         {breadcrumbs && (
-          <Breadcrumb className={bem.e('breadcrumb')}>
+          <Breadcrumb
+            style={{ backgroundColor: '#eef0f1' }}
+            className={bem.e('breadcrumb')}
+          >
             <BreadcrumbItem>Home</BreadcrumbItem>
             {breadcrumbs.length &&
               breadcrumbs.map(({ name, active }, index) => (
