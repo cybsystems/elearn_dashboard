@@ -21,16 +21,16 @@ const Page = ({
   return (
     <Tag className={classes} {...restProps}>
       <div className={bem.e('header')}>
-        {title && typeof title === 'string' ? (
+        {/* {title && typeof title === 'string' ? (
           <h1 type="h1" className={bem.e('title')}>
             {title}
           </h1>
         ) : (
           title
-        )}
+        )} */}
         {breadcrumbs && (
           <Breadcrumb
-            style={{ backgroundColor: '#eef0f1' }}
+            style={{ backgroundColor: '#eef0f1',fontSize:13 }}
             className={bem.e('breadcrumb')}
           >
             <BreadcrumbItem>Home</BreadcrumbItem>

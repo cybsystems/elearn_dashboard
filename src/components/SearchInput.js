@@ -4,16 +4,20 @@ import { Form, Input } from 'reactstrap';
 
 const SearchInput = () => {
   return (
-    <Form inline className="cr-search-form" onSubmit={e => e.preventDefault()}>
+    <Form
+      inline
+      className="cr-search-form ml-5"
+      onSubmit={e => e.preventDefault()}
+    >
       <MdSearch
         size="20"
         className="cr-search-form__icon-search text-secondary"
       />
       <Input
         type="search"
-        className="cr-search-form__input"
+        className="cr-search-form__input "
         placeholder="Search..."
-        style={{padding:'20px 400px 20px 0px'}}
+        style={{ padding: '10px 400px 10px 0px', fontSize: 13 }}
       />
     </Form>
   );

@@ -21,7 +21,7 @@ class Sidebar extends React.Component {
     const { currentTitle } = this.state;
 
     return (
-      <aside className={bem.b()}>
+      <div className={bem.b()}>
         <div className={bem.e('content')}>
           <Navbar>
             <center className="navbar-brand  ">
@@ -59,7 +59,7 @@ class Sidebar extends React.Component {
             />
           </Nav>
         </div>
-      </aside>
+      </div>
     );
   }
 }

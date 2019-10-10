@@ -18,6 +18,7 @@ export default class CollapseAbleNavItem extends Component {
       <div>
         <NavItem
           className={bem.e('nav-item')}
+          style={{ fontSize: 13 }}
           onClick={() => {
             onNavItemToggle(title);
           }}
@@ -50,7 +51,9 @@ export default class CollapseAbleNavItem extends Component {
                 exact={exact}
               >
                 <Icon className={bem.e('nav-item-icon')} />
-                <span className="">{name}</span>
+                <span className="" style={{ fontSize: 11 }}>
+                  {name}
+                </span>
               </BSNavLink>
             </NavItem>
           ))}

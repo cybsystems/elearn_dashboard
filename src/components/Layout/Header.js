@@ -57,16 +57,16 @@ class Header extends React.Component {
         light
         expand
         className={bem.b('bg-white')}
-        style={{
-          position: 'fixed',
-          zIndex: 1,
-          width: '100%',
-          paddingBottom: 25,
-        }}
+        // style={{
+        //   position: 'fixed',
+        //   zIndex: 1,
+        //   width: '100%',
+        //   paddingBottom: 12,
+        // }}
       >
-        <Nav navbar className="mr-2">
+        <Nav navbar  >
           <Button outline onClick={this.handleSidebarControlButton}>
-            <MdClearAll size={25} />
+            <MdClearAll size={15} />
           </Button>
         </Nav>
         <Nav navbar>

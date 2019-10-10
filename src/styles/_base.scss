@@ -31,7 +31,10 @@ button,
   font-family: Poppins, Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: $font-weight-normal;
 }
-
+.dropzoneClass
+{
+  font-size: 20px !important;
+}
 .cr-app {
   display: flex;
   width: 100%;

@@ -25,6 +25,7 @@ export default class AddResourcePage extends Component {
                     className="form-control"
                     value={fileName}
                     onChange={this.onFileNameChange}
+                    style={{ fontSize: 13 }}
                   />
                 </div>
               </div>
@@ -32,6 +33,7 @@ export default class AddResourcePage extends Component {
               <div className="row">
                 <div className="col-lg-12 col-sm-12 col-md-12">
                   <DropzoneArea
+                    dropzoneParagraphClass="dropzoneClass"
                     dropzoneText="Drag and Drop video or pdf files"
                     onChange={this.onFileUpload}
                   />
@@ -41,6 +43,7 @@ export default class AddResourcePage extends Component {
                 <div className="col-lg-12">
                   <div style={{ float: 'right' }}>
                     <button
+                      style={{fontSize:13}}
                       disabled={
                         !files.length || !fileName || !fileName.trim().length
                       }

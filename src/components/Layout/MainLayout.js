@@ -62,7 +62,7 @@ class MainLayout extends React.Component {
         <Sidebar />
         <Content fluid onClick={this.handleContentClick}>
           <Header />
-          <div style={{ marginTop: 100 }}>{children}</div>
+          <div  >{children}</div>
         </Content>
       </main>
     );
