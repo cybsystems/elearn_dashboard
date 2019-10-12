@@ -4,17 +4,18 @@ import StudentList from './students/components/StudentList';
 import { connect } from 'react-redux';
 import { updateRawData } from '../actions';
 import { FilterButton } from '../reusableComponents/FilterButton';
+import FilterPanel from './students/components/FilterPanel';
 
 export class StudentManagentImpl extends Component {
   componentDidMount() {
     const students = [];
     for (let i = 0; i < 100; i++)
       students.push({ name: 'Student ' + i, category: 'Category ' + i });
-    updateRawData({ students: students });
+    updateRawData({ students: students, originalStudents: students });
   }
   onFilterClicked = () => updateRawData({ showFilter: !this.props.showFilter });
   render() {
-    const { students, showFilter } = this.props;
+    const { students, showFilter, originalStudents } = this.props;
     return (
       <Page
         className="DashboardPage"
@@ -30,12 +31,20 @@ export class StudentManagentImpl extends Component {
         }
       >
         <div style={{ marginBottom: 10 }}>
-          <div style={{ display: 'flex' }}>
+          <div
+            style={{ display: 'flex', cursor: 'pointer' }}
+            onClick={this.onFilterClicked}
+          >
             <FilterColumnPanel
               columns={[{ title: 'Name' }, { title: 'Category', flex: 2 }]}
               showFilter={showFilter}
             />
           </div>
+          {showFilter && (
+            <div style={{ display: 'flex' }}>
+              <FilterPanel originalStudents={originalStudents} />
+            </div>
+          )}
         </div>
         <div>{students && <StudentList students={students} />}</div>
       </Page>
@@ -54,15 +63,13 @@ const FilterColumnPanel = ({ columns, showFilter }) => (
         />
       </div>
     ))}
-    <div style={{ flex:1 }}></div>
+    <div style={{ flex: 1 }}></div>
   </>
 );
-
-
-
+ 
 const mapStateToProps = state => {
-  const { students, showFilter = false } = state.rawData;
-  return { students, showFilter };
+  const { students, originalStudents, showFilter = false } = state.rawData;
+  return { students, originalStudents, showFilter };
 };
 const StudentManagent = connect(mapStateToProps)(StudentManagentImpl);
 export default StudentManagent;
