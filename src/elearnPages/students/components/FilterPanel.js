@@ -3,30 +3,40 @@ import { updateRawData } from '../../../actions';
 
 export default class FilterPanel extends Component {
   onChange = e => {
-    const name = this.refs['name'].value;
+    const { originalStudents, students } = this.props;
+    let id = e.target.id;
+    const name = this.refs[id].value;
+    const nameValue = this.refs['name'].value;
     const email = this.refs['email'].value;
-    const category = this.refs['category'].value;
-    updateRawData({
-      students: this.props.originalStudents.filter(
-        s =>
-          s.name.toLowerCase().search(name.toLowerCase()) !== -1 &&
-          s.email.toLowerCase().search(email.toLowerCase()) !== -1 &&
-          s.category === category,
-      ),
-    });
+
+    if (id == 'category' && name == 'all') {
+      updateRawData({ students: originalStudents });
+      return;
+    }
+    let filteredStudents = originalStudents.filter(
+      student => student[id].search(name) != -1,
+    );
+
+    filteredStudents =
+      id == 'name' && email.trim().length
+        ? originalStudents.filter(
+            student =>
+              student[id].search(name) != -1 &&
+              student.email.search(email) != -1,
+          )
+        : id == 'email' && nameValue.trim().length
+        ? originalStudents.filter(
+            student =>
+              student[id].search(name) != -1 &&
+              student.name.search(nameValue) != -1,
+          )
+        : originalStudents.filter(student => student[id].search(name) != -1);
+
+    updateRawData({ students: filteredStudents });
   };
 
-  onSelectChange = () => {
-    const category = this.refs['category'].value;
-    updateRawData({
-      students:
-        category == 'all'
-          ? this.props.originalStudents
-          : this.props.originalStudents.filter(s => s.category == category),
-    });
-  };
   render() {
-    const { categories } = this.props;
+    const { categories, students, originalStudents } = this.props;
     return (
       <>
         <div style={{ flex: 1 }} className="mr-1">
@@ -52,9 +62,11 @@ export default class FilterPanel extends Component {
         <div style={{ flex: 1 }}>
           <select
             className="form-control textf"
-            onChange={this.onSelectChange}
+            onChange={this.onChange}
             ref="category"
+            id="category"
           >
+            <option >Select Category</option>
             <option value={'all'}>All</option>
             {categories.map(category => (
               <option key={category} value={category}>

@@ -5,18 +5,16 @@ import { connect } from 'react-redux';
 import { updateRawData } from '../actions';
 import { FilterButton } from '../reusableComponents/FilterButton';
 import FilterPanel from './students/components/FilterPanel';
+import FilterColumnPanel from '../reusableComponents/FilterColumnPanel';
 
 export class StudentManagentImpl extends Component {
-  componentDidMount() {
-    const students = [];
-    for (let i = 0; i < 100; i++)
-      students.push({
-        name: 'Student ' + i,
-        email: 'email' + i,
-        category: 'Category ' + i,
-      });
+  componentDidMount = async () => {
+    const students = await fetch('http://localhost/getStudents.php').then(res =>
+      res.json(),
+    );
+
     updateRawData({ students: students, originalStudents: students });
-  }
+  };
   onFilterClicked = () =>
     updateRawData({
       students: this.props.showFilter
@@ -58,8 +56,9 @@ export class StudentManagentImpl extends Component {
             <div style={{ display: 'flex' }}>
               <FilterPanel
                 showFilter={showFilter}
-                categories={[...new Set(originalStudents.map(s => s.category))]}
+                categories={[...new Set(students.map(s => s.category))]}
                 originalStudents={originalStudents}
+                students={students}
               />
             </div>
           )}
@@ -69,21 +68,6 @@ export class StudentManagentImpl extends Component {
     );
   }
 }
-
-const FilterColumnPanel = ({ columns, showFilter }) => (
-  <>
-    {columns.map((column, i) => (
-      <div key={i} style={{ flex: column.flex || 1, color: '#787272' }}>
-        <span style={{ fontSize: 14 }}>{column.title}</span>
-        <i
-          style={{ fontSize: 10, marginLeft: 15, color: '#787272' }}
-          className={`fa  fa-chevron-${showFilter ? 'down' : 'up'}`}
-        />
-      </div>
-    ))}
-    <div style={{ flex: 1 }}></div>
-  </>
-);
 
 const mapStateToProps = state => {
   const { students, originalStudents, showFilter = false } = state.rawData;
