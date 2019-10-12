@@ -1,28 +1,7 @@
 import Page from 'components/Page';
   
 import React from 'react';
-import { Bar, Line } from 'react-chartjs-2';
-import {
-  MdBubbleChart,
-  MdInsertChart,
-  MdPersonPin,
-  MdPieChart,
-  MdRateReview,
-  MdShare,
-  MdShowChart,
-  MdThumbUp,
-} from 'react-icons/md';
-import {
-  Badge,
-  Card,
-  CardBody,
-  CardGroup,
-  CardHeader,
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Row,
-} from 'reactstrap';
+
 import { getColor } from 'utils/colors';
 
 const today = new Date();

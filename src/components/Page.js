@@ -5,7 +5,6 @@ import bn from 'utils/bemnames';
 
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
- 
 const bem = bn.create('page');
 
 const Page = ({
@@ -14,34 +13,34 @@ const Page = ({
   tag: Tag,
   className,
   children,
+  topComponent,
   ...restProps
 }) => {
   const classes = bem.b('px-3', className);
 
   return (
     <Tag className={classes} {...restProps}>
-      <div className={bem.e('header')}>
-        {/* {title && typeof title === 'string' ? (
-          <h1 type="h1" className={bem.e('title')}>
-            {title}
-          </h1>
-        ) : (
-          title
-        )} */}
-        {breadcrumbs && (
-          <Breadcrumb
-            style={{ backgroundColor: '#eef0f1',fontSize:13 }}
-            className={bem.e('breadcrumb')}
-          >
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            {breadcrumbs.length &&
-              breadcrumbs.map(({ name, active }, index) => (
-                <BreadcrumbItem key={index} active={active}>
-                  {name}
-                </BreadcrumbItem>
-              ))}
-          </Breadcrumb>
-        )}
+      <div
+        className={bem.e('header')}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
+        <div style={{flex:1}}>
+          {breadcrumbs && (
+            <Breadcrumb
+              style={{ backgroundColor: '#eef0f1', fontSize: 13 }}
+              className={bem.e('breadcrumb')}
+            >
+              <BreadcrumbItem>Home</BreadcrumbItem>
+              {breadcrumbs.length &&
+                breadcrumbs.map(({ name, active }, index) => (
+                  <BreadcrumbItem key={index} active={active}>
+                    {name}
+                  </BreadcrumbItem>
+                ))}
+            </Breadcrumb>
+          )}
+        </div>
+        {topComponent}
       </div>
       {children}
     </Tag>
@@ -57,7 +56,7 @@ Page.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       active: PropTypes.bool,
-    })
+    }),
   ),
 };
 

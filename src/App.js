@@ -8,7 +8,9 @@ import StudentManagent from './elearnPages/StudentManagment';
 import ResourceManagement from './elearnPages/ResourceManagement';
 import AddStudentPage from './elearnPages/students/AddStudentPage';
 import AddResourcePage from './elearnPages/resources/AddResourcePage';
+
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
+
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
