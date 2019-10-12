@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
 import List from '../../../reusableComponents/List';
+import { updateRawData } from '../../../actions';
+
+class RightAlignButtons extends React.Component {
+  onClick =()=> this.props.onClick(this.props.student);
+  render() {
+    return (
+      <div style={{ float: 'right', marginRight: 15 }}>
+        <button className="btn btn-sm btn-primary">Accept</button>
+        <button
+          onClick={this.onClick}
+          className="btn btn-sm btn-danger"
+          style={{ marginLeft: 4 }}
+        >
+          Reject
+        </button>
+      </div>
+    );
+  }
+}
 
 export default class StudentList extends Component {
+  onClick = student => {
+    
+  };
+
   appendLastButtons = students =>
     students.map(student => {
       student['lastItem'] = (
-        <div style={{ float: 'right', marginRight: 15 }}>
-          <button className="btn btn-sm btn-primary">Accept</button>
-          <button className="btn btn-sm btn-danger" style={{ marginLeft: 4 }}>
-            Reject
-          </button>
-        </div>
+        <RightAlignButtons onClick={this.onClick} student={student} />
       );
 
       return student;
@@ -18,7 +36,7 @@ export default class StudentList extends Component {
 
   render() {
     const { students } = this.props;
-    const  flexWidths=[1,2,1]
+    const flexWidths = [1, 2, 1];
     return (
       <div style={{ height: '75vh', overflowY: 'auto', overflowX: 'hidden' }}>
         <List
