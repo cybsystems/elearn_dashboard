@@ -24,7 +24,7 @@ class App extends React.Component {
           <MainLayout breakpoint={this.props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
               <Route exact path="/" component={DashboardPage} />
-              <Route exact path="/student" component={StudentManagent} />
+              <Route exact path="/invitations" component={StudentManagent} />
               <Route exact path="/resource" component={ResourceManagement} />
               <Route exact path="/add_student" component={AddStudentPage} />
               <Route exact path="/add_resource" component={AddResourcePage} />

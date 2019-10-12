@@ -3,7 +3,7 @@ import List from '../../../reusableComponents/List';
 import { updateRawData } from '../../../actions';
 
 class RightAlignButtons extends React.Component {
-  onClick =()=> this.props.onClick(this.props.student);
+  onClick = () => this.props.onClick(this.props.student);
   render() {
     return (
       <div style={{ float: 'right', marginRight: 15 }}>
@@ -21,9 +21,7 @@ class RightAlignButtons extends React.Component {
 }
 
 export default class StudentList extends Component {
-  onClick = student => {
-    
-  };
+  onClick = student => {};
 
   appendLastButtons = students =>
     students.map(student => {
@@ -36,9 +34,15 @@ export default class StudentList extends Component {
 
   render() {
     const { students } = this.props;
-    const flexWidths = [1, 2, 1];
+    const flexWidths = [1, 1, 1, 1];
     return (
-      <div style={{ height: '75vh', overflowY: 'auto', overflowX: 'hidden' }}>
+      <div
+        style={{
+          height: '77vh',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+        }}
+      >
         <List
           flexWidths={flexWidths}
           items={this.appendLastButtons(students)}

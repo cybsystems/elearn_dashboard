@@ -10,10 +10,20 @@ export class StudentManagentImpl extends Component {
   componentDidMount() {
     const students = [];
     for (let i = 0; i < 100; i++)
-      students.push({ name: 'Student ' + i, category: 'Category ' + i });
+      students.push({
+        name: 'Student ' + i,
+        email: 'email' + i,
+        category: 'Category ' + i,
+      });
     updateRawData({ students: students, originalStudents: students });
   }
-  onFilterClicked = () => updateRawData({ showFilter: !this.props.showFilter });
+  onFilterClicked = () =>
+    updateRawData({
+      students: this.props.showFilter
+        ? this.props.originalStudents
+        : this.props.students,
+      showFilter: !this.props.showFilter,
+    });
   render() {
     const { students, showFilter, originalStudents } = this.props;
     return (
@@ -36,13 +46,21 @@ export class StudentManagentImpl extends Component {
             onClick={this.onFilterClicked}
           >
             <FilterColumnPanel
-              columns={[{ title: 'Name' }, { title: 'Category', flex: 2 }]}
+              columns={[
+                { title: 'Name' },
+                { title: 'Email' },
+                { title: 'Category' },
+              ]}
               showFilter={showFilter}
             />
           </div>
           {showFilter && (
             <div style={{ display: 'flex' }}>
-              <FilterPanel originalStudents={originalStudents} />
+              <FilterPanel
+                showFilter={showFilter}
+                categories={[...new Set(originalStudents.map(s => s.category))]}
+                originalStudents={originalStudents}
+              />
             </div>
           )}
         </div>
@@ -54,8 +72,8 @@ export class StudentManagentImpl extends Component {
 
 const FilterColumnPanel = ({ columns, showFilter }) => (
   <>
-    {columns.map(column => (
-      <div style={{ flex: column.flex || 1, color: '#787272' }}>
+    {columns.map((column, i) => (
+      <div key={i} style={{ flex: column.flex || 1, color: '#787272' }}>
         <span style={{ fontSize: 14 }}>{column.title}</span>
         <i
           style={{ fontSize: 10, marginLeft: 15, color: '#787272' }}
@@ -66,7 +84,7 @@ const FilterColumnPanel = ({ columns, showFilter }) => (
     <div style={{ flex: 1 }}></div>
   </>
 );
- 
+
 const mapStateToProps = state => {
   const { students, originalStudents, showFilter = false } = state.rawData;
   return { students, originalStudents, showFilter };
