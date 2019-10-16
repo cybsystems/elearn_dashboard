@@ -9,7 +9,7 @@ export class ResourceManagementImpl extends Component {
   componentDidMount() {
     const resources = [];
     for (let i = 0; i < 100; i++)
-      resources.push({ name: 'resource' + i, type: 'PDF' });
+      resources.push({ name: 'Rerource Item ' + i, type: 'PDF' });
     updateRawData({
       resources: resources,
       originalResources: resources,

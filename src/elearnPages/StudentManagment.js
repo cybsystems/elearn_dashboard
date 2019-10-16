@@ -6,14 +6,12 @@ import { updateRawData } from '../actions';
 import { FilterButton } from '../reusableComponents/FilterButton';
 import FilterPanel from './students/components/FilterPanel';
 import FilterColumnPanel from '../reusableComponents/FilterColumnPanel';
+import { store } from '../store';
+import { FETCH_INVITATIONS } from '../actions/actionTypes';
 
 export class StudentManagentImpl extends Component {
   componentDidMount = async () => {
-    const students = await fetch('http://localhost/getStudents.php').then(res =>
-      res.json(),
-    );
-
-    updateRawData({ students: students, originalStudents: students });
+   store.dispatch({type:FETCH_INVITATIONS})
   };
   onFilterClicked = () =>
     updateRawData({
