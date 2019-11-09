@@ -39,6 +39,7 @@ export default class FilterPanel extends Component {
     const { categories, students, originalStudents } = this.props;
     return (
       <>
+        <div style={{ flex: 1 }} className="mr-1"></div>
         <div style={{ flex: 1 }} className="mr-1">
           <input
             type="text"
@@ -46,6 +47,7 @@ export default class FilterPanel extends Component {
             onChange={this.onChange}
             id="name"
             ref="name"
+            placeholder="Enter Name"
           />
         </div>
 
@@ -57,6 +59,7 @@ export default class FilterPanel extends Component {
             style={{ marginRight: 5 }}
             onChange={this.onChange}
             id="email"
+            placeholder="Enter Email"
           />
         </div>
         <div style={{ flex: 1 }}>
@@ -66,7 +69,7 @@ export default class FilterPanel extends Component {
             ref="category"
             id="category"
           >
-            <option >Select Category</option>
+            <option>Select Category</option>
             <option value={'all'}>All</option>
             {categories.map(category => (
               <option key={category} value={category}>

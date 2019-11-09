@@ -21,10 +21,11 @@ const DataCard = ({ item, flexWidths }) => (
       marginTop: 10,
       padding: '7px 0px 7px 0px',
       justifyContent: 'space-between',
+      cursor:'pointer'
     }}
   >
     {Object.keys(item).map((key, i) => (
-      <div style={{ flex: flexWidths[i], marginLeft: i == 0 ? 10 : 0 }} key={key}>
+      <div style={{ flex: flexWidths[i], marginLeft: i == 0 ? 10 : 0 }}  >
         {item[key]}
       </div>
     ))}

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import List from '../../../reusableComponents/List';
 import { updateRawData } from '../../../actions';
+import { store } from '../../../store';
+import { REMOVE_INVITATION } from '../../../actions/actionTypes';
+import { removeInvitationAPI } from '../../../apis/students';
 
 class RightAlignButtons extends React.Component {
   onClick = () => this.props.onClick(this.props.student);
@@ -21,7 +24,10 @@ class RightAlignButtons extends React.Component {
 }
 
 export default class StudentList extends Component {
-  onClick = student => {};
+  onClick = async student => {
+    const res = await removeInvitationAPI(student.s_id);
+    updateRawData({ students: res });
+  };
 
   appendLastButtons = students =>
     students.map(student => {

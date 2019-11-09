@@ -8,10 +8,13 @@ import FilterPanel from './students/components/FilterPanel';
 import FilterColumnPanel from '../reusableComponents/FilterColumnPanel';
 import { store } from '../store';
 import { FETCH_INVITATIONS } from '../actions/actionTypes';
+import { fetchInvitationApi } from '../apis/students';
 
 export class StudentManagentImpl extends Component {
   componentDidMount = async () => {
-   store.dispatch({type:FETCH_INVITATIONS})
+    // store.dispatch({ type: FETCH_INVITATIONS });
+    const res = await fetchInvitationApi();
+    updateRawData({ students: res, originalStudents: res });
   };
   onFilterClicked = () =>
     updateRawData({
@@ -37,20 +40,23 @@ export class StudentManagentImpl extends Component {
         }
       >
         <div style={{ marginBottom: 10 }}>
-          <div
-            style={{ display: 'flex', cursor: 'pointer' }}
-            onClick={this.onFilterClicked}
-          >
-            <FilterColumnPanel
-              columns={[
-                { title: 'Name' },
-                { title: 'Email' },
-                { title: 'Category' },
-              ]}
-              showFilter={showFilter}
-            />
-          </div>
-          {showFilter && (
+          {originalStudents && (
+            <div
+              style={{ display: 'flex', cursor: 'pointer' }}
+              onClick={this.onFilterClicked}
+            >
+              <FilterColumnPanel
+                columns={[
+                  { title: 'Id' },
+                  { title: 'Name' },
+                  { title: 'Email' },
+                  { title: 'Category' },
+                ]}
+                showFilter={showFilter}
+              />
+            </div>
+          )}
+          {showFilter && originalStudents && (
             <div style={{ display: 'flex' }}>
               <FilterPanel
                 showFilter={showFilter}
