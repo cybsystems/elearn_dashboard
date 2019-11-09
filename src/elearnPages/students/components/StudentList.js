@@ -26,7 +26,10 @@ class RightAlignButtons extends React.Component {
 export default class StudentList extends Component {
   onClick = async student => {
     const res = await removeInvitationAPI(student.s_id);
-    updateRawData({ students: res });
+    updateRawData({ removeingStudent: student.s_id });
+    setTimeout(() => {
+      updateRawData({ students: res });
+    }, 1000);
   };
 
   appendLastButtons = students =>
@@ -39,7 +42,7 @@ export default class StudentList extends Component {
     });
 
   render() {
-    const { students } = this.props;
+    const { students, removeingStudent } = this.props;
     const flexWidths = [1, 1, 1, 1];
     return (
       <div
@@ -52,6 +55,8 @@ export default class StudentList extends Component {
         <List
           flexWidths={flexWidths}
           items={this.appendLastButtons(students)}
+          removingItem={removeingStudent}
+          mainKey="s_id"
         />
       </div>
     );

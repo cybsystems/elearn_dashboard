@@ -6,30 +6,28 @@ import { updateRawData } from '../actions';
 import { FilterButton } from '../reusableComponents/FilterButton';
 import FilterPanel from './students/components/FilterPanel';
 import FilterColumnPanel from '../reusableComponents/FilterColumnPanel';
-import { store } from '../store';
-import { FETCH_INVITATIONS } from '../actions/actionTypes';
 import { fetchInvitationApi } from '../apis/students';
+import { columns, breadcrumbs, onFilterClick } from './utils';
 
 export class StudentManagentImpl extends Component {
   componentDidMount = async () => {
-    // store.dispatch({ type: FETCH_INVITATIONS });
     const res = await fetchInvitationApi();
     updateRawData({ students: res, originalStudents: res });
   };
-  onFilterClicked = () =>
-    updateRawData({
-      students: this.props.showFilter
-        ? this.props.originalStudents
-        : this.props.students,
-      showFilter: !this.props.showFilter,
-    });
+  onFilterClicked = () => onFilterClick(this);
+
   render() {
-    const { students, showFilter, originalStudents } = this.props;
+    const {
+      students,
+      showFilter,
+      originalStudents,
+      removeingStudent,
+    } = this.props;
     return (
       <Page
         className="DashboardPage"
         title="Students"
-        breadcrumbs={[{ name: 'Students', active: true }]}
+        breadcrumbs={breadcrumbs}
         topComponent={
           <div style={{ float: 'right' }}>
             <FilterButton
@@ -45,15 +43,7 @@ export class StudentManagentImpl extends Component {
               style={{ display: 'flex', cursor: 'pointer' }}
               onClick={this.onFilterClicked}
             >
-              <FilterColumnPanel
-                columns={[
-                  { title: 'Id' },
-                  { title: 'Name' },
-                  { title: 'Email' },
-                  { title: 'Category' },
-                ]}
-                showFilter={showFilter}
-              />
+              <FilterColumnPanel columns={columns} showFilter={showFilter} />
             </div>
           )}
           {showFilter && originalStudents && (
@@ -67,15 +57,22 @@ export class StudentManagentImpl extends Component {
             </div>
           )}
         </div>
-        <div>{students && <StudentList students={students} />}</div>
+        <div>
+          {students && <StudentList students={students} removeingStudent ={removeingStudent}/>}
+        </div>
       </Page>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { students, originalStudents, showFilter = false } = state.rawData;
-  return { students, originalStudents, showFilter };
+  const {
+    students,
+    originalStudents,
+    showFilter = false,
+    removeingStudent,
+  } = state.rawData;
+  return { students, originalStudents, showFilter, removeingStudent };
 };
 const StudentManagent = connect(mapStateToProps)(StudentManagentImpl);
 export default StudentManagent;

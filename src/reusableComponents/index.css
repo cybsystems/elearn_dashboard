@@ -1,0 +1,8 @@
+.hidden {
+     transform:  translate(100%,  0px);    
+
+
+    transition-duration: 1s;
+
+ 
+}

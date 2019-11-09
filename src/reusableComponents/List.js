@@ -1,19 +1,49 @@
 import React, { Component } from 'react';
-
+import './index.css';
+import { updateRawData } from '../actions';
 export default class List extends Component {
   render() {
-    const { items, flexWidths } = this.props;
+    const { items, flexWidths, removingItem, mainKey } = this.props;
     return (
       <>
         {items.map((item, i) => (
-          <DataCard key={i} flexWidths={flexWidths} item={item} />
+          <ItemCard
+            key={i}
+            flexWidths={flexWidths}
+            removingItem={removingItem}
+            item={item}
+            mainKey={mainKey}
+          />
         ))}
       </>
     );
   }
 }
 
-const DataCard = ({ item, flexWidths }) => (
+class ItemCard extends React.Component {
+  componentDidUpdate(prevProps) {
+    const { removingItem, mainKey, item } = this.props;
+
+    if (prevProps && removingItem && prevProps.removingItem !== removingItem) {
+      if (removingItem == item[mainKey]) {
+        updateRawData({ removingItem: null });
+      }
+    }
+  }
+  render() {
+    const { removingItem, item, mainKey } = this.props;
+    return (
+      <div
+        ref="card"
+        className={removingItem === item[mainKey] ? 'hidden' : ''}
+      >
+        <DataCard {...this.props} />
+      </div>
+    );
+  }
+}
+
+export const DataCard = ({ item, flexWidths }) => (
   <div
     style={{
       display: 'flex',
@@ -21,11 +51,11 @@ const DataCard = ({ item, flexWidths }) => (
       marginTop: 10,
       padding: '7px 0px 7px 0px',
       justifyContent: 'space-between',
-      cursor:'pointer'
+      cursor: 'pointer',
     }}
   >
     {Object.keys(item).map((key, i) => (
-      <div style={{ flex: flexWidths[i], marginLeft: i == 0 ? 10 : 0 }}  >
+      <div key={i} style={{ flex: flexWidths[i], marginLeft: i == 0 ? 10 : 0 }}>
         {item[key]}
       </div>
     ))}
