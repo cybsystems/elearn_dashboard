@@ -32,10 +32,15 @@ class ItemCard extends React.Component {
   }
   render() {
     const { removingItem, item, mainKey } = this.props;
+
     return (
       <div
         ref="card"
-        className={removingItem === item[mainKey] ? 'hidden' : ''}
+        className={
+          removingItem && mainKey && removingItem === item[mainKey]
+            ? 'hidden'
+            : ''
+        }
       >
         <DataCard {...this.props} />
       </div>

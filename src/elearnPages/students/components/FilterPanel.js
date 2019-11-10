@@ -3,36 +3,16 @@ import { updateRawData } from '../../../actions';
 
 export default class FilterPanel extends Component {
   onChange = e => {
-    const { originalStudents, students } = this.props;
-    let id = e.target.id;
-    const name = this.refs[id].value;
-    const nameValue = this.refs['name'].value;
-    const email = this.refs['email'].value;
-
-    if (id == 'category' && name == 'all') {
-      updateRawData({ students: originalStudents });
-      return;
-    }
-    let filteredStudents = originalStudents.filter(
-      student => student[id].search(name) != -1,
+    const field = e.target.id;
+    const { students } = this.props;
+    const value = e.target.value;
+    const newStudents = students.filter(student =>
+      student[field]
+        .toLowerCase()
+        .trim()
+        .includes(value.toLowerCase().trim()),
     );
-
-    filteredStudents =
-      id == 'name' && email.trim().length
-        ? originalStudents.filter(
-            student =>
-              student[id].search(name) != -1 &&
-              student.email.search(email) != -1,
-          )
-        : id == 'email' && nameValue.trim().length
-        ? originalStudents.filter(
-            student =>
-              student[id].search(name) != -1 &&
-              student.name.search(nameValue) != -1,
-          )
-        : originalStudents.filter(student => student[id].search(name) != -1);
-
-    updateRawData({ students: filteredStudents });
+    console.log(newStudents);
   };
 
   render() {

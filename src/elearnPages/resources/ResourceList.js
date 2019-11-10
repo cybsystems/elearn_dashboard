@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import List from '../../reusableComponents/List';
+import { store } from '../../store';
+import { updateRawData } from '../../actions';
 
 class RightAlignButtons extends React.Component {
   onClick = () => this.props.onClick(this.props.resource);
@@ -20,7 +22,16 @@ class RightAlignButtons extends React.Component {
 }
 
 export default class ResourceList extends Component {
-  onClick = resource => {};
+  onClick = resource => {
+    const newResources = store
+      .getState()
+      .rawData.resources.filter(r => r.name !== resource.name);
+
+    updateRawData({ removingResource: resource.name });
+    setTimeout(() => {
+      updateRawData({ resources: newResources });
+    }, 1000);
+  };
 
   appendLastButtons = resources =>
     resources.map(resource => {
@@ -33,7 +44,7 @@ export default class ResourceList extends Component {
 
   render() {
     const flexWidths = [1, 2, 1];
-    const { resources } = this.props;
+    const { resources, removingResource } = this.props;
     return (
       <div
         style={{
@@ -45,6 +56,8 @@ export default class ResourceList extends Component {
         <List
           flexWidths={flexWidths}
           items={this.appendLastButtons(resources)}
+          mainKey="name"
+          removingItem={removingResource}
         />
       </div>
     );

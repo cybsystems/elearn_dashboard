@@ -24,7 +24,7 @@ export class ResourceManagementImpl extends Component {
     });
 
   render() {
-    const { resources, showFilter } = this.props;
+    const { resources, showFilter, removingResource } = this.props;
     return (
       <Page
         className="DashboardPage"
@@ -48,15 +48,20 @@ export class ResourceManagementImpl extends Component {
             showFilter={showFilter}
           />
         </div>
-        {resources && <ResourceList resources={resources} />}
+        {resources && <ResourceList resources={resources} removingResource={removingResource}/>}
       </Page>
     );
   }
 }
 
 const mapStateToPrpos = state => {
-  const { resources, originalResources, showFilter } = state.rawData;
-  return { resources, originalResources, showFilter };
+  const {
+    resources,
+    originalResources,
+    showFilter,
+    removingResource,
+  } = state.rawData;
+  return { resources, originalResources, showFilter, removingResource };
 };
 
 const ResourceManagement = connect(mapStateToPrpos)(ResourceManagementImpl);
