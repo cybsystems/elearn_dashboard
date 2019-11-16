@@ -7,5 +7,3 @@ while($r = mysqli_fetch_assoc($res)) {
   $rows[] = $r;
 }
 echo json_encode($rows);
-
-?>

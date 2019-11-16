@@ -10,6 +10,7 @@ import AddStudentPage from './elearnPages/students/AddStudentPage';
 import AddResourcePage from './elearnPages/resources/AddResourcePage';
 import ToastComponent from './reusableComponents/ToastComponent';
 import CategoryManagement from './elearnPages/CategoryManagement';
+import AddCategoryPage from './elearnPages/categories/AddCategoryPage';
 
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
 
@@ -32,6 +33,7 @@ class App extends React.Component {
               <Route exact path="/categories" component={CategoryManagement} />
               <Route exact path="/add_student" component={AddStudentPage} />
               <Route exact path="/add_resource" component={AddResourcePage} />
+              <Route exact path="/add_catrgory" component={AddCategoryPage} />
             </React.Suspense>
           </MainLayout>
           <Redirect to="/" />

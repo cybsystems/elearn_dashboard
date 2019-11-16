@@ -36,6 +36,12 @@ export const navComponentsCategory = [
     exact: false,
     Icon: MdRadioButtonChecked,
   },
+  {
+    to: '/add_catrgory',
+    name: 'Add Category',
+    exact: false,
+    Icon: MdRadioButtonChecked,
+  },
 ];
 
 export const navItems = [
