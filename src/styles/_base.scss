@@ -36,7 +36,9 @@ button,
 {
   font-size: 20px !important;
 }
-
+.form-control{
+  font-size: small !important;
+}
 .dflex{
   display: flex;
   flex-direction: row;
@@ -56,6 +58,7 @@ button,
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+  font-size: small !important;
 }
 .smbtn{
   font-size: 11px;

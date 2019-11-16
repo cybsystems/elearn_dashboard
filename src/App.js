@@ -9,9 +9,9 @@ import ResourceManagement from './elearnPages/ResourceManagement';
 import AddStudentPage from './elearnPages/students/AddStudentPage';
 import AddResourcePage from './elearnPages/resources/AddResourcePage';
 import ToastComponent from './reusableComponents/ToastComponent';
+import CategoryManagement from './elearnPages/CategoryManagement';
 
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
-
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -29,6 +29,7 @@ class App extends React.Component {
               <Route exact path="/" component={DashboardPage} />
               <Route exact path="/invitations" component={StudentManagent} />
               <Route exact path="/resource" component={ResourceManagement} />
+              <Route exact path="/categories" component={CategoryManagement} />
               <Route exact path="/add_student" component={AddStudentPage} />
               <Route exact path="/add_resource" component={AddResourcePage} />
             </React.Suspense>

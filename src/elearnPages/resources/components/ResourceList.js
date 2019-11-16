@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import List from '../../reusableComponents/List';
-import { store } from '../../store';
-import { updateRawData } from '../../actions';
+import List from '../../../reusableComponents/List';
+import { store } from '../../../store';
+import { updateRawData } from '../../../actions';
 
 class RightAlignButtons extends React.Component {
   onClick = () => this.props.onClick(this.props.resource);

@@ -27,7 +27,7 @@ export default class StudentList extends Component {
   onClick = async student => {
     const res = await removeInvitationAPI(student.s_id);
     updateRawData({ removeingStudent: student.s_id });
-    showToast('Student Removed', { autoClose: 3000,type:'success' });
+    showToast('Invitation Removed', { autoClose: 3000, type: 'success' });
     setTimeout(() => {
       updateRawData({ students: res, originalStudents: res });
     }, 1000);

@@ -3,7 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { Nav, Navbar, NavItem, NavLink as BSNavLink } from 'reactstrap';
 import bn from 'utils/bemnames';
 import CollapseAbleNavItem from '../../elearnComponents/CollapseAbleNavItem';
-import { navItems, navComponentsResource, navComponentsStudent } from './utils';
+import {
+  navItems,
+  navComponentsResource,
+  navComponentsStudent,
+  navComponentsCategory,
+} from './utils';
 
 const bem = bn.create('sidebar');
 
@@ -56,6 +61,12 @@ class Sidebar extends React.Component {
               onNavItemToggle={this.onNavItemToggle}
               isOpen={currentTitle === 'Resources'}
               navComponents={navComponentsResource}
+            />
+            <CollapseAbleNavItem
+              title="Categories"
+              onNavItemToggle={this.onNavItemToggle}
+              isOpen={currentTitle === 'Categories'}
+              navComponents={navComponentsCategory}
             />
           </Nav>
         </div>

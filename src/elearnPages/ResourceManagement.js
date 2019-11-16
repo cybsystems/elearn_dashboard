@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../components/Page';
-import ResourceList from './resources/ResourceList';
+import ResourceList from './resources/components/ResourceList';
 import { connect } from 'react-redux';
 import { updateRawData } from '../actions';
 import FilterColumnPanel from '../reusableComponents/FilterColumnPanel';
