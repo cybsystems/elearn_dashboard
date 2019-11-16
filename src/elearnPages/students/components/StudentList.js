@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import List from '../../../reusableComponents/List';
 import { updateRawData } from '../../../actions';
-import { store } from '../../../store';
-import { REMOVE_INVITATION } from '../../../actions/actionTypes';
 import { removeInvitationAPI } from '../../../apis/students';
 
 class RightAlignButtons extends React.Component {
@@ -10,10 +8,10 @@ class RightAlignButtons extends React.Component {
   render() {
     return (
       <div style={{ float: 'right', marginRight: 15 }}>
-        <button className="btn btn-sm btn-primary">Accept</button>
+        <button className="btn smbtn btn-sm btn-primary">Accept</button>
         <button
           onClick={this.onClick}
-          className="btn btn-sm btn-danger"
+          className="btn smbtn btn-sm btn-danger"
           style={{ marginLeft: 4 }}
         >
           Reject
@@ -28,7 +26,7 @@ export default class StudentList extends Component {
     const res = await removeInvitationAPI(student.s_id);
     updateRawData({ removeingStudent: student.s_id });
     setTimeout(() => {
-      updateRawData({ students: res });
+      updateRawData({ students: res, originalStudents: res });
     }, 1000);
   };
 
@@ -47,7 +45,7 @@ export default class StudentList extends Component {
     return (
       <div
         style={{
-          height: '77vh',
+          height: '80vh',
           overflowY: 'auto',
           overflowX: 'hidden',
         }}

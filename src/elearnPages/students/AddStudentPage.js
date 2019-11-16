@@ -9,8 +9,14 @@ export default class AddStudentPage extends Component {
         title="Add Student"
         breadcrumbs={[{ name: 'Add Students', active: true }]}
       >
-        Add Student Page
+        <AddStudentForm />
       </Page>
     );
   }
 }
+
+const AddStudentForm = () => (
+  <div className="card">
+    <div className="card-header">Add Student </div>
+  </div>
+);

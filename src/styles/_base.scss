@@ -25,6 +25,7 @@ button,
 .display-4,
 .navbar,
 .brand,
+
 .alert {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -47,3 +48,16 @@ button,
   margin: 0;
   overflow-x: hidden;
 }
+.smbtn{
+  font-size: 11px;
+  height: 25px !important;
+}
+.card-flex
+{
+    display: flex;
+    margin-top: 10px;
+    padding: 5px 0px 5px 0px;
+    justify-content: space-between;
+    cursor: pointer;
+    flex-direction: row;
+} 

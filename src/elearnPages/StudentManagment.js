@@ -41,41 +41,16 @@ export class StudentManagentImpl extends Component {
       >
         {originalStudents && originalStudents.length > 0 ? (
           <div>
-            <div style={{ marginBottom: 10 }}>
-              {originalStudents && (
-                <div
-                  style={{ display: 'flex', cursor: 'pointer' }}
-                  onClick={this.onFilterClicked}
-                >
-                  <FilterColumnPanel
-                    columns={columns}
-                    showFilter={showFilter}
-                  />
-                </div>
-              )}
-              {showFilter && originalStudents && (
-                <div style={{ display: 'flex' }}>
-                  <FilterPanel
-                    showFilter={showFilter}
-                    categories={[...new Set(students.map(s => s.category))]}
-                    originalStudents={originalStudents}
-                    students={students}
-                  />
-                </div>
-              )}
-            </div>
-            <div>
-              {students && originalStudents && originalStudents.length > 0 && (
-                <StudentList
-                  students={students}
-                  removeingStudent={removeingStudent}
-                />
-              )}
-            </div>
+            {students && originalStudents && originalStudents.length > 0 && (
+              <StudentList
+                students={students}
+                removeingStudent={removeingStudent}
+              />
+            )}
           </div>
         ) : (
           <center>
-            <h5 style={{ color: '#677f97' }}>NO STUDENTS FOUND</h5>
+            <h5 style={{ color: '#677f97' }}>NO INVITATIONS FOUND</h5>
           </center>
         )}
       </Page>

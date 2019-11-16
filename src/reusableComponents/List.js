@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
 import './index.css';
 import { updateRawData } from '../actions';
+import { DataCard } from './DataCard';
 export default class List extends Component {
+  onKeyDown = e => {
+    let counter = 1;
+    if (e.keyCode == 38) counter = -1;
+    let item = this.refs['item' + (e.target.tabIndex + counter)];
+    if (item) item.focus();
+  };
+
   render() {
     const { items, flexWidths, removingItem, mainKey } = this.props;
     return (
-      <>
+      <div>
         {items.map((item, i) => (
-          <ItemCard
-            key={i}
-            flexWidths={flexWidths}
-            removingItem={removingItem}
-            item={item}
-            mainKey={mainKey}
-          />
+          <div onKeyDown={this.onKeyDown} tabindex={i} ref={'item' + i}>
+            <ItemCard
+              key={i}
+              flexWidths={flexWidths}
+              removingItem={removingItem}
+              item={item}
+              mainKey={mainKey}
+            />
+          </div>
         ))}
-      </>
+      </div>
     );
   }
 }
@@ -47,22 +57,3 @@ class ItemCard extends React.Component {
     );
   }
 }
-
-export const DataCard = ({ item, flexWidths }) => (
-  <div
-    style={{
-      display: 'flex',
-      backgroundColor: 'white',
-      marginTop: 10,
-      padding: '7px 0px 7px 0px',
-      justifyContent: 'space-between',
-      cursor: 'pointer',
-    }}
-  >
-    {Object.keys(item).map((key, i) => (
-      <div key={i} style={{ flex: flexWidths[i], marginLeft: i == 0 ? 10 : 0 }}>
-        {item[key]}
-      </div>
-    ))}
-  </div>
-);
