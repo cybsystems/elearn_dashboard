@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
+import { AddStudentForm } from '../forms/AddStudentForm';
 
 export default class AddStudentPage extends Component {
   render() {
@@ -14,9 +15,3 @@ export default class AddStudentPage extends Component {
     );
   }
 }
-
-const AddStudentForm = () => (
-  <div className="card">
-    <div className="card-header">Add Student </div>
-  </div>
-);

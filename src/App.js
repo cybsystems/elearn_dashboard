@@ -8,6 +8,7 @@ import StudentManagent from './elearnPages/StudentManagment';
 import ResourceManagement from './elearnPages/ResourceManagement';
 import AddStudentPage from './elearnPages/students/AddStudentPage';
 import AddResourcePage from './elearnPages/resources/AddResourcePage';
+import ToastComponent from './reusableComponents/ToastComponent';
 
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
 
@@ -22,6 +23,8 @@ class App extends React.Component {
       <BrowserRouter basename={getBasename()}>
         <Switch>
           <MainLayout breakpoint={this.props.breakpoint}>
+            <ToastComponent />
+
             <React.Suspense fallback={<PageSpinner />}>
               <Route exact path="/" component={DashboardPage} />
               <Route exact path="/invitations" component={StudentManagent} />

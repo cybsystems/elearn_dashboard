@@ -25,7 +25,7 @@ button,
 .display-4,
 .navbar,
 .brand,
-
+ 
 .alert {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -35,6 +35,15 @@ button,
 .dropzoneClass
 {
   font-size: 20px !important;
+}
+
+.dflex{
+  display: flex;
+  flex-direction: row;
+  
+}
+.dgrid{
+  display: grid;
 }
 .textf
 {

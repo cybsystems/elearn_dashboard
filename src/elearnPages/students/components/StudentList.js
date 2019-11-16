@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import List from '../../../reusableComponents/List';
 import { updateRawData } from '../../../actions';
 import { removeInvitationAPI } from '../../../apis/students';
+import 'react-toastify/dist/ReactToastify.css';
+import { showToast } from '../../../helpers/toasts';
 
 class RightAlignButtons extends React.Component {
   onClick = () => this.props.onClick(this.props.student);
@@ -25,6 +27,7 @@ export default class StudentList extends Component {
   onClick = async student => {
     const res = await removeInvitationAPI(student.s_id);
     updateRawData({ removeingStudent: student.s_id });
+    showToast('Student Removed', { autoClose: 3000,type:'success' });
     setTimeout(() => {
       updateRawData({ students: res, originalStudents: res });
     }, 1000);
