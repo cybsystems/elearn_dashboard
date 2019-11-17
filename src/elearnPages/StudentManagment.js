@@ -8,6 +8,7 @@ import FilterPanel from './students/components/FilterPanel';
 import FilterColumnPanel from '../reusableComponents/FilterColumnPanel';
 import { fetchInvitationApi } from '../apis/students';
 import { columns, breadcrumbs, onFilterClick } from './utils';
+import { NotFoundComponent } from '../reusableComponents/NotFoundComponet';
 
 export class StudentManagentImpl extends Component {
   componentDidMount = async () => {
@@ -50,7 +51,7 @@ export class StudentManagentImpl extends Component {
           </div>
         ) : (
           <center>
-            <h5 style={{ color: '#677f97' }}>NO INVITATIONS FOUND</h5>
+            <NotFoundComponent title='Invitations Not Found' />
           </center>
         )}
       </Page>

@@ -22,6 +22,7 @@ export default class AddResourcePage extends Component {
           breadcrumbs={[{ name: 'Add Resources', active: true }]}
         >
           <div className="card">
+            <div className="card-header cardHeader">Add Resource</div>
             <div className="card-body">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-6">
@@ -49,11 +50,11 @@ export default class AddResourcePage extends Component {
                 <div className="col-lg-12">
                   <div style={{ float: 'right' }}>
                     <button
-                      style={{ fontSize: 13 }}
+                      
                       disabled={
                         !files.length || !fileName || !fileName.trim().length
                       }
-                      className="btn btn-primary"
+                      className="btn smbtn btn-sm"
                       onClick={this.addResource}
                     >
                       Upload

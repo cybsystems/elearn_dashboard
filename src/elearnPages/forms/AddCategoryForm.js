@@ -15,7 +15,7 @@ export class AddCategoryForm extends React.Component {
   render() {
     return (
       <div className="card">
-        <div className="card-header">Add Category </div>
+        <div className="card-header cardHeader">Add Category </div>
         <div className="card-body container">
           <Form
             schema={categorySchema}
@@ -28,7 +28,7 @@ export class AddCategoryForm extends React.Component {
               <button
                 type="submit"
                 style={{ marginLeft: 20 }}
-                className="btn btn-primary btn-sm smbtn"
+                className="btn  btn-sm smbtn"
               >
                 Add Category
               </button>

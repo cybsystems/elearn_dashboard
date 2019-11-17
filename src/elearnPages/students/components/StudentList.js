@@ -10,7 +10,7 @@ class RightAlignButtons extends React.Component {
   render() {
     return (
       <div style={{ float: 'right', marginRight: 15 }}>
-        <button className="btn smbtn btn-sm btn-primary">Accept</button>
+        <button className="btn smbtn btn-sm ">Accept</button>
         <button
           onClick={this.onClick}
           className="btn smbtn btn-sm btn-danger"

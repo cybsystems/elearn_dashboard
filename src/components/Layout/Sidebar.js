@@ -51,9 +51,9 @@ class Sidebar extends React.Component {
             ))}
 
             <CollapseAbleNavItem
-              title="Students"
+              title="Invitations"
               onNavItemToggle={this.onNavItemToggle}
-              isOpen={currentTitle === 'Students'}
+              isOpen={currentTitle === 'Invitations'}
               navComponents={navComponentsStudent}
             />
             <CollapseAbleNavItem

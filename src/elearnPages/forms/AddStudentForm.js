@@ -12,9 +12,15 @@ export class AddStudentForm extends React.Component {
   render() {
     return (
       <div className="card">
-        <div className="card-header">Add Student </div>
+        <div className="card-header cardHeader">Add Student </div>
         <div className="card-body container">
-          <Form schema={studentSchema} uiSchema={studentUiSchema} />
+          <Form schema={studentSchema} uiSchema={studentUiSchema}>
+            <div>
+              <button type="submit" className="btn btn-sm smbtn">
+                Add Student
+              </button>
+            </div>
+          </Form>
         </div>
       </div>
     );
