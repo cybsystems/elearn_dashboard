@@ -15,7 +15,7 @@ export class AddCategoryForm extends React.Component {
   render() {
     return (
       <div className="card">
-        <div className="card-header cardHeader">Add Category </div>
+        <div className="card-header cardHeader ">Add Category </div>
         <div className="card-body container">
           <Form
             schema={categorySchema}

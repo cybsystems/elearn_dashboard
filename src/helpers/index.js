@@ -13,4 +13,5 @@ export async function postData(url = '', data = {}) {
     method: 'POST',
     body: formData,
   });
+  return  response.json();
 }

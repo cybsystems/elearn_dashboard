@@ -5,6 +5,6 @@ $cat = $_POST['Category'];
 $sql = "insert into category values ($catId,'$cat')";
 $res = mysqli_query($con, $sql);
 if ($res)
-    echo 'Y';
+    echo  json_encode(array('res' => 'Y'));
 else
-    echo 'N';
+    echo  json_encode(array('res' => 'N'));;
