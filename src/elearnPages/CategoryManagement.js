@@ -48,7 +48,7 @@ export class CategoryManagementImpl extends Component {
 
 const Category = ({ categoryItem }) => (
   <div className="card" style={{ marginTop: 10 }}>
-    <div className="card-body">
+    <div className="card-body" style={{height:35,padding:5}}>
       {categoryItem.category}
       <div style={{ float: 'right' }}>
         <button
