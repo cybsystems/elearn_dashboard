@@ -7,10 +7,16 @@ import { showToast } from '../../helpers/toasts';
 export class AddCategoryForm extends React.Component {
   state = { formData: { CategoryId: '', Category: '' } };
   onSubmit = async ({ formData }, e) => {
-    await postData('http://localhost/addCategory.php', formData);
-    this.setState({ formData: { CategoryId: '', Category: '' } });
+    const res = await postData('http://localhost/addCategory.php', formData);
+    if (res.res == 'Y'){
+      this.setState({ formData: { CategoryId: '', Category: '' } });
     showToast('Category Added', { type: 'success' });
+    }
+    else{
+    showToast('Something went wrong', { type: 'error' });
+    }
   };
+
 
   render() {
     return (
