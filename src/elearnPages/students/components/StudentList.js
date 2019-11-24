@@ -25,8 +25,8 @@ class RightAlignButtons extends React.Component {
 
 export default class StudentList extends Component {
   onClick = async student => {
-    const res = await removeInvitationAPI(student.s_id);
-    updateRawData({ removeingStudent: student.s_id });
+    const res = await removeInvitationAPI(student.id);
+    updateRawData({ removeingStudent: student.id });
     showToast('Invitation Removed', { autoClose: 3000, type: 'success' });
     setTimeout(() => {
       updateRawData({ students: res, originalStudents: res });
@@ -57,7 +57,7 @@ export default class StudentList extends Component {
           flexWidths={flexWidths}
           items={this.appendLastButtons(students)}
           removingItem={removeingStudent}
-          mainKey="s_id"
+          mainKey="id"
         />
       </div>
     );

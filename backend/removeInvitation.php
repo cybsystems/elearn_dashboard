@@ -3,9 +3,9 @@
 include('db.php');
 require('invitations.php');
 
-$s_id=$_POST['s_id'];
+$id=$_POST['id'];
 
-$sql='delete   from invitation where s_id='.$s_id;
+$sql= 'delete   from studentinvitations where id='. $id;
 
 $res=mysqli_query($con,$sql);
 

@@ -29,6 +29,7 @@
     "react-simple-maps": "^0.12.1",
     "react-sizeme": "^2.5.2",
     "react-toastify": "^5.4.1",
+    "react_chrome_speechtotext": "^1.1.17",
     "reactstrap": "^7.1.0",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",

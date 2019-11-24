@@ -13,7 +13,7 @@ export const removeInvitationAPI = async sid => {
   
   try {
     let formData = new FormData();
-    formData.append('s_id', sid);
+    formData.append('id', sid);
     const res = await fetch('http://localhost/removeInvitation.php', {
       method: 'post',
       body: formData,
