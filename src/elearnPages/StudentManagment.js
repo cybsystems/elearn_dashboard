@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 import Page from '../components/Page';
 import StudentList from './students/components/StudentList';
 import { connect } from 'react-redux';
-import { updateRawData } from '../actions';
 import { FilterButton } from '../reusableComponents/FilterButton';
-import FilterPanel from './students/components/FilterPanel';
-import FilterColumnPanel from '../reusableComponents/FilterColumnPanel';
-import { fetchInvitationApi } from '../apis/students';
-import { columns, breadcrumbs, onFilterClick } from './utils';
+import { breadcrumbs, onFilterClick, loadInvitations } from './utils';
 import { NotFoundComponent } from '../reusableComponents/NotFoundComponet';
+import ReloadButton from '../reusableComponents/ReloadButton';
 
 export class StudentManagentImpl extends Component {
-  componentDidMount = async () => {
-    const res = await fetchInvitationApi();
-    updateRawData({ students: res, originalStudents: res });
-  };
+  componentDidMount = async () => await loadInvitations();
   onFilterClicked = () => onFilterClick(this);
+  onRefreshClicked = async () => await loadInvitations();
 
   render() {
     const {
@@ -31,12 +26,7 @@ export class StudentManagentImpl extends Component {
         breadcrumbs={breadcrumbs}
         topComponent={
           <div style={{ float: 'right' }}>
-            {originalStudents && originalStudents.length > 0 && (
-              <FilterButton
-                onClick={this.onFilterClicked}
-                txt={showFilter ? 'Hide Filters' : 'Show Filters'}
-              />
-            )}
+            <ReloadButton onClick={this.onRefreshClicked} />
           </div>
         }
       >
@@ -51,7 +41,7 @@ export class StudentManagentImpl extends Component {
           </div>
         ) : (
           <center>
-            <NotFoundComponent title='Invitations Not Found' />
+            <NotFoundComponent title="Invitations Not Found" />
           </center>
         )}
       </Page>

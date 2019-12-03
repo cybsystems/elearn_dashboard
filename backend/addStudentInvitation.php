@@ -1,10 +1,13 @@
 <?php
 include('db.php');
-$email = $_POST['email'];
-$username = $_POST['username'];
-$password = $_POST['password'];
+
+$full_name = $_POST['full_name'];
+   $email = $_POST['email'];
+ 
 $classId = $_POST['classId'];
-$sql = "insert into studentinvitations (username,password,email,classId) values ('$username','$password','$email',$classId)";
+
+$sql = "insert into studentinvitations (full_name, email,  classId) values 
+('$full_name' ,'$email',$classId)";
 
 $res = mysqli_query($con, $sql);
 if ($res)

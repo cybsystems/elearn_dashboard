@@ -6,15 +6,16 @@ import { getCategories, removeCategory } from '../apis/categories';
 import { connect } from 'react-redux';
 import { NotFoundComponent } from '../reusableComponents/NotFoundComponet';
 import { showToast } from '../helpers/toasts';
+import ReloadButton from '../reusableComponents/ReloadButton';
 export class CategoryManagementImpl extends Component {
   componentDidMount = async () => {
     const categories = await getCategories();
     updateRawData({ categories: categories });
   };
-  refresh=async ()=>{
-     const categories = await getCategories();
+  refresh = async () => {
+    const categories = await getCategories();
     updateRawData({ categories: categories });
-  }
+  };
   render() {
     const { categories } = this.props;
     return (
@@ -24,10 +25,8 @@ export class CategoryManagementImpl extends Component {
         breadcrumbs={[{ name: 'Categories', active: true }]}
         topComponent={
           <div style={{ float: 'right' }}>
-            <button onClick={this.refresh} className="btn btn-sm btn-outline-primary" style={{marginRight:10}}>
-              Reload &nbsp; <i className="fa fa-refresh" />
-            </button>
-            <FilterButton />
+            <ReloadButton onClick={this.refresh} />
+           
           </div>
         }
       >
@@ -48,7 +47,7 @@ export class CategoryManagementImpl extends Component {
 
 const Category = ({ categoryItem }) => (
   <div className="card" style={{ marginTop: 10 }}>
-    <div className="card-body" style={{height:35,padding:5}}>
+    <div className="card-body" style={{ height: 35, padding: 5 }}>
       {categoryItem.category}
       <div style={{ float: 'right' }}>
         <button

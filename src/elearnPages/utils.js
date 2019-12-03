@@ -1,4 +1,5 @@
-import { updateRawData } from "../actions";
+import { updateRawData } from '../actions';
+import { fetchInvitationApi } from '../apis/students';
 
 export const columns = [
   { title: 'Id' },
@@ -16,3 +17,8 @@ export const onFilterClick = caller =>
       : caller.props.students,
     showFilter: !caller.props.showFilter,
   });
+
+export const loadInvitations = async () => {
+  const res = await fetchInvitationApi();
+  updateRawData({ students: res, originalStudents: res });
+};
