@@ -57,6 +57,7 @@ class Header extends React.Component {
         light
         expand
         className={bem.b('bg-white')}
+        style={{backgroundColor:'#3d8dbc'}}
         // style={{
         //   position: 'fixed',
         //   zIndex: 1,
