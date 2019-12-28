@@ -14,11 +14,12 @@ class RightAlignButtons extends React.Component {
           onClick={() => this.onClick("ACCEPT")}
           className="btn smbtn btn-sm "
           disabled={acceptingStudent === student.id}
+          style={{width:70}}
         >
           {acceptingStudent === student.id
             ? <i
                 className="fa fa-circle-o-notch fa-spin"
-                style="font-size:24px"
+                style={{fontSize:10}}
               />
             : "  Accept"}
         </button>
