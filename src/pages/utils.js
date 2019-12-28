@@ -1,21 +1,27 @@
-import { showToast } from "../helpers/toasts";
+import { showToast } from '../helpers/toasts';
 
 export const getCardItems = async () => {
   try {
     window.scrollTo(0, 0);
     const cardItems = {
-      Students: { icon: "fa fa-graduation-cap", color: "#01c0ef" },
-      Videos: { icon: "fa fa-video-camera", color: "#dd4c3a" },
+      Students: { icon: 'fa fa-graduation-cap', color: '#01c0ef' },
+      Videos: {
+        icon: 'fa fa-video-camera',
+        color: '#dd4c3a',
+        goto: '/resource',
+      },
       Requests: {
-        icon: "fa fa-paper-plane ",
-        color: "#f39c13",
+        icon: 'fa fa-paper-plane ',
+        color: '#f39c13',
+        goto: '/invitations',
       },
     };
-    cardItems["PDF Notes"] = {
-      icon: "fa fa-sticky-note-o",
-      color: "#01a65b",
+    cardItems['PDF Notes'] = {
+      icon: 'fa fa-sticky-note-o',
+      color: '#01a65b',
+      goto: '/resource',
     };
-    const cardResponse = await fetch("http://localhost/getDashboardInfo.php")
+    const cardResponse = await fetch('http://localhost/getDashboardInfo.php')
       .then(res => res.json())
       .then(res => res);
     const cards = cardResponse.res;
@@ -25,6 +31,6 @@ export const getCardItems = async () => {
     });
     return cardsForDashBoard;
   } catch (err) {
-    showToast("Something went wrong !", { type: "error" });
+    showToast('Something went wrong !', { type: 'error' });
   }
 };

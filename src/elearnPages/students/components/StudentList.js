@@ -18,7 +18,7 @@ class RightAlignButtons extends React.Component {
         >
           {acceptingStudent === student.id
             ? <i
-                className="fa fa-circle-o-notch fa-spin"
+                className="fa fa-spinner fa-spin"
                 style={{fontSize:10}}
               />
             : "  Accept"}
