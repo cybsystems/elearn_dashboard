@@ -1,20 +1,32 @@
-import React, { Component } from 'react';
-import List from '../../../reusableComponents/List';
-import { updateRawData } from '../../../actions';
-import { removeInvitationAPI } from '../../../apis/students';
-import 'react-toastify/dist/ReactToastify.css';
-import { showToast } from '../../../helpers/toasts';
+import React, { Component } from "react";
+import List from "../../../reusableComponents/List";
+import { removeInvitation, acceptInvitation } from "./utils";
+import "react-toastify/dist/ReactToastify.css";
 
 class RightAlignButtons extends React.Component {
-  onClick = () => this.props.onClick(this.props.student);
+  onClick = tag => this.props.onClick(this.props.student, tag);
   render() {
+    const { acceptingStudent, removeInvitation, student } = this.props;
+
     return (
-      <div style={{ float: 'right', marginRight: 15 }}>
-        <button className="btn smbtn btn-sm ">Accept</button>
+      <div style={{ float: "right", marginRight: 15 }}>
         <button
-          onClick={this.onClick}
+          onClick={() => this.onClick("ACCEPT")}
+          className="btn smbtn btn-sm "
+          disabled={acceptingStudent === student.id}
+        >
+          {acceptingStudent === student.id
+            ? <i
+                className="fa fa-circle-o-notch fa-spin"
+                style="font-size:24px"
+              />
+            : "  Accept"}
+        </button>
+        <button
+          onClick={() => this.onClick("REJECT")}
           className="btn smbtn btn-sm btn-danger"
           style={{ marginLeft: 4 }}
+          disabled={removeInvitation === student.id}
         >
           Reject
         </button>
@@ -24,19 +36,23 @@ class RightAlignButtons extends React.Component {
 }
 
 export default class StudentList extends Component {
-  onClick = async student => {
-    const res = await removeInvitationAPI(student.id);
-    updateRawData({ removeingStudent: student.id });
-    showToast('Invitation Removed', { autoClose: 3000, type: 'success' });
-    setTimeout(() => {
-      updateRawData({ students: res, originalStudents: res });
-    }, 1000);
+  onClick = async (student, tag) => {
+    if (tag === "REJECT") {
+      removeInvitation(student);
+    } else {
+      acceptInvitation(student);
+    }
   };
 
   appendLastButtons = students =>
     students.map(student => {
-      student['lastItem'] = (
-        <RightAlignButtons onClick={this.onClick} student={student} />
+      student["lastItem"] = (
+        <RightAlignButtons
+          onClick={this.onClick}
+          acceptingStudent={this.props.acceptingStudent}
+          removeingStudent={this.props.removeingStudent}
+          student={student}
+        />
       );
 
       return student;
@@ -44,13 +60,13 @@ export default class StudentList extends Component {
 
   render() {
     const { students, removeingStudent } = this.props;
-    const flexWidths = [1, 1, 1, 1];
+    const flexWidths = [1, 1, 1];
     return (
       <div
         style={{
-          height: '80vh',
-          overflowY: 'auto',
-          overflowX: 'hidden',
+          height: "80vh",
+          overflowY: "auto",
+          overflowX: "hidden"
         }}
       >
         <List

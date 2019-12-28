@@ -24,3 +24,18 @@ export const removeInvitationAPI = async sid => {
     return 0;
   }
 };
+
+export const acceptInvitationAPI = async sid => {
+  try {
+    let formData = new FormData();
+    formData.append('id', sid);
+    const res = await fetch('http://localhost/acceptInvitation.php', {
+      method: 'post',
+      body: formData,
+    }).then(res => res.json());
+     
+    return res;
+  } catch (err) {
+    return 0;
+  }
+};
