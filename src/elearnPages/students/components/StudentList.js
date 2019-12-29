@@ -9,25 +9,28 @@ class RightAlignButtons extends React.Component {
     const { acceptingStudent, removeInvitation, student } = this.props;
 
     return (
-      <div style={{ float: "right", marginRight: 15 }}>
+      <div style={{ float: 'right', marginRight: 15 }}>
         <button
-          onClick={() => this.onClick("ACCEPT")}
+          onClick={() => this.onClick('ACCEPT')}
           className="btn smbtn btn-sm "
-          disabled={acceptingStudent === student.id}
-          style={{width:70}}
+          disabled={
+            acceptingStudent === student.id || removeInvitation === student.id
+          }
+          style={{ width: 70 }}
         >
-          {acceptingStudent === student.id
-            ? <i
-                className="fa fa-spinner fa-spin"
-                style={{fontSize:10}}
-              />
-            : "  Accept"}
+          {acceptingStudent === student.id ? (
+            <i className="fa fa-spinner fa-spin" style={{ fontSize: 10 }} />
+          ) : (
+            '  Accept'
+          )}
         </button>
         <button
-          onClick={() => this.onClick("REJECT")}
+          onClick={() => this.onClick('REJECT')}
           className="btn smbtn btn-sm btn-danger"
           style={{ marginLeft: 4 }}
-          disabled={removeInvitation === student.id}
+          disabled={
+            acceptingStudent === student.id || removeInvitation === student.id
+          }
         >
           Reject
         </button>

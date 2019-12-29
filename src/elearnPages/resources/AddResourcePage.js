@@ -5,11 +5,21 @@ import { DropzoneArea } from 'material-ui-dropzone';
 export default class AddResourcePage extends Component {
   state = { files: [], fileName: '' };
   addResource = () => {
+    const {fileName}=this.state
     console.log('====================================');
     console.log(this.state.files);
     console.log('====================================');
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+      const formData = new FormData();
+      formData.append('file', this.state.files[0], this.state.files[0].name);
+      req.open('POST', `http://localhost/uploadResource.php`);
+      req.send(formData);
+    });
   };
+
   onFileUpload = files => this.setState({ files: files });
+  
   onFileNameChange = evt => this.setState({ fileName: evt.target.value });
 
   render() {
@@ -50,7 +60,6 @@ export default class AddResourcePage extends Component {
                 <div className="col-lg-12">
                   <div style={{ float: 'right' }}>
                     <button
-                      
                       disabled={
                         !files.length || !fileName || !fileName.trim().length
                       }
