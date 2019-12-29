@@ -4,13 +4,18 @@ import { store } from '../../../store';
 import { updateRawData } from '../../../actions';
 
 class RightAlignButtons extends React.Component {
-  onClick = () => this.props.onClick(this.props.resource);
+  onClick = tag => this.props.onClick(this.props.resource, tag);
   render() {
     return (
       <div style={{ float: 'right', marginRight: 15 }}>
-        <button className="btn  btn-sm   smbtn">Assign</button>
         <button
-          onClick={this.onClick}
+          onClick={() => this.onClick('VIEW')}
+          className="btn  btn-sm   smbtn"
+        >
+          View
+        </button>
+        <button
+          onClick={() => this.onClick('REMOVE')}
           className="btn  btn-sm btn-danger  smbtn"
           style={{ marginLeft: 4 }}
         >
@@ -22,16 +27,7 @@ class RightAlignButtons extends React.Component {
 }
 
 export default class ResourceList extends Component {
-  onClick = resource => {
-    const newResources = store
-      .getState()
-      .rawData.resources.filter(r => r.name !== resource.name);
-
-    updateRawData({ removingResource: resource.name });
-    setTimeout(() => {
-      updateRawData({ resources: newResources });
-    }, 1000);
-  };
+  onClick = (resource, tag) => this.props.onItemClick(resource, tag);
 
   appendLastButtons = resources =>
     resources.map(resource => {
@@ -43,7 +39,7 @@ export default class ResourceList extends Component {
     });
 
   render() {
-    const flexWidths = [1, 2, 1];
+    const flexWidths = [1, 0, 1, 1];
     const { resources, removingResource } = this.props;
     return (
       <div
@@ -56,7 +52,8 @@ export default class ResourceList extends Component {
         <List
           flexWidths={flexWidths}
           items={this.appendLastButtons(resources)}
-          mainKey="name"
+          mainKey="rid"
+          hideKey="rpath"
           removingItem={removingResource}
         />
       </div>

@@ -1,19 +1,13 @@
 <?php
+require('resources.php');
 
  $targetfolder = "uploads/";
-
  $targetfolder = $targetfolder . basename( $_FILES['file']['name']) ;
-
+ $fileName = $_POST['fname'];
 if(move_uploaded_file($_FILES['file']['tmp_name'], $targetfolder))
-
- {
-
- echo "The file ". basename( $_FILES['file']['name']). " is uploaded";
-
- }
-
+{
+echo addResource($fileName,$targetfolder,'PDF');
+}
  else {
-
  echo "Problem uploading file";
-
  }

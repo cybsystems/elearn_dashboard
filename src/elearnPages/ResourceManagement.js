@@ -5,16 +5,28 @@ import { connect } from 'react-redux';
 import { updateRawData } from '../actions';
 import FilterColumnPanel from '../reusableComponents/FilterColumnPanel';
 import { FilterButton } from '../reusableComponents/FilterButton';
+import {
+  removeResource,
+  downloadResource,
+  getResources,
+} from './resources/components/utils';
+import ReloadButton from '../reusableComponents/ReloadButton';
+import { NotFoundComponent } from '../reusableComponents/NotFoundComponet';
+
 export class ResourceManagementImpl extends Component {
-  componentDidMount() {
-    const resources = [];
-    for (let i = 0; i < 100; i++)
-      resources.push({ name: 'Rerource Item ' + i, type: 'PDF' });
-    updateRawData({
-      resources: resources,
-      originalResources: resources,
-    });
-  }
+  componentDidMount = async () => await getResources();
+
+  onItemClicked = (resource, tag) => {
+    if (tag === 'REMOVE') {
+      removeResource(resource);
+    }
+    if (tag === 'VIEW') {
+      downloadResource(resource);
+    }
+  };
+
+  onRefreshClicked = async () => await getResources();
+
   onFilterClicked = () =>
     updateRawData({
       students: this.props.showFilter
@@ -32,6 +44,8 @@ export class ResourceManagementImpl extends Component {
         breadcrumbs={[{ name: 'Resources', active: true }]}
         topComponent={
           <div style={{ float: 'right' }}>
+            <ReloadButton onClick={this.onRefreshClicked} />
+
             <FilterButton
               onClick={this.onFilterClicked}
               txt={showFilter ? 'Hide Filters' : 'Show Filters'}
@@ -39,16 +53,32 @@ export class ResourceManagementImpl extends Component {
           </div>
         }
       >
-        <div
-          style={{ display: 'flex', cursor: 'pointer' }}
-          onClick={this.onFilterClicked}
-        >
-          <FilterColumnPanel
-            columns={[{ title: 'Name' }, { title: 'Type', flex: 2 }]}
-            showFilter={showFilter}
-          />
-        </div>
-        {resources && <ResourceList resources={resources} removingResource={removingResource}/>}
+        {resources && resources.length ? (
+          <>
+            <div
+              style={{ display: 'flex', cursor: 'pointer' }}
+              onClick={this.onFilterClicked}
+            >
+              <FilterColumnPanel
+                columns={[
+                  { title: 'Id', flex: 1 },
+                  { title: 'Name', flex: 2 },
+                  { title: 'Type', flex: 1 },
+                ]}
+                showFilter={showFilter}
+              />
+            </div>
+            <ResourceList
+              resources={resources}
+              onItemClick={this.onItemClicked}
+              removingResource={removingResource}
+            />{' '}
+          </>
+        ) : (
+          <center>
+            <NotFoundComponent title="Resources Not Found" />
+          </center>
+        )}
       </Page>
     );
   }
