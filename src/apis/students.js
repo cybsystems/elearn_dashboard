@@ -1,8 +1,9 @@
-import { store } from '../store';
+import { baseUrl } from "../global";
 
+  
 export const fetchInvitationApi = async () => {
   try {
-    const res = await fetch('http://localhost/getInvitations.php', {}).then(
+    const res = await fetch(`${baseUrl}/getInvitations.php`, {}).then(
       res => res.json(),
     );
     return res;
@@ -14,7 +15,7 @@ export const removeInvitationAPI = async sid => {
   try {
     let formData = new FormData();
     formData.append('id', sid);
-    const res = await fetch('http://localhost/removeInvitation.php', {
+    const res = await fetch(`${baseUrl}/removeInvitation.php`, {
       method: 'post',
       body: formData,
     }).then(res => res.json());
@@ -29,7 +30,7 @@ export const acceptInvitationAPI = async sid => {
   try {
     let formData = new FormData();
     formData.append('id', sid);
-    const res = await fetch('http://localhost/acceptInvitation.php', {
+    const res = await fetch(`${baseUrl}/acceptInvitation.php`, {
       method: 'post',
       body: formData,
     }).then(res => res.json());
