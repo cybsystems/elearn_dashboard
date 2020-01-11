@@ -11,7 +11,7 @@ export default class List extends Component {
   };
 
   render() {
-    const { items, flexWidths, removingItem, mainKey } = this.props;
+    const { items, flexWidths, removingItem, mainKey, hideKey } = this.props;
     return (
       <div>
         {items.map((item, i) => (
@@ -21,6 +21,7 @@ export default class List extends Component {
               flexWidths={flexWidths}
               removingItem={removingItem}
               item={item}
+              hideKey={hideKey}
               mainKey={mainKey}
             />
           </div>

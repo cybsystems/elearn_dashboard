@@ -9,9 +9,11 @@ import {
   navComponentsStudent,
   navComponentsCategory,
 } from './utils';
+import { withRouter } from 'react-router-dom';
 
 const bem = bn.create('sidebar');
 
+const titlesAsPath={"/invitations":"Invitations"}
 class Sidebar extends React.Component {
   state = {
     currentTitle: '',
@@ -21,7 +23,13 @@ class Sidebar extends React.Component {
     const { currentTitle } = this.state;
     this.setState({ currentTitle: currentTitle === title ? '' : title });
   };
-
+  
+  componentDidMount() {
+    const { history } = this.props;
+    history.listen((location, action) => {
+       
+    });
+  }
   render() {
     const { currentTitle } = this.state;
 
@@ -75,4 +83,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

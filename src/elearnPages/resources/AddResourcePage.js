@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { DropzoneArea } from 'material-ui-dropzone';
+import { uploadFile } from './components/utils';
+import { showToast } from '../../helpers/toasts';
 
 export default class AddResourcePage extends Component {
   state = { files: [], fileName: '' };
-  addResource = () => {
-    console.log('====================================');
-    console.log(this.state.files);
-    console.log('====================================');
+  addResource = async () => {
+    try {
+      const { fileName, files } = this.state;
+      const res = await uploadFile(files[0], fileName);
+      console.log(res);
+      showToast('File Uploaded Successfully', { type: 'success' });
+    } catch (err) {}
   };
+
   onFileUpload = files => this.setState({ files: files });
+
   onFileNameChange = evt => this.setState({ fileName: evt.target.value });
 
   render() {
@@ -50,7 +57,6 @@ export default class AddResourcePage extends Component {
                 <div className="col-lg-12">
                   <div style={{ float: 'right' }}>
                     <button
-                      
                       disabled={
                         !files.length || !fileName || !fileName.trim().length
                       }

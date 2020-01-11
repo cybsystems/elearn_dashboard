@@ -23,7 +23,7 @@ class App extends React.Component {
     return (
       <BrowserRouter basename={getBasename()}>
         <Switch>
-          <MainLayout breakpoint={this.props.breakpoint}>
+           <MainLayout breakpoint={this.props.breakpoint}>
             <ToastComponent />
 
             <React.Suspense fallback={<PageSpinner />}>
@@ -68,5 +68,3 @@ const query = ({ width }) => {
 };
 
 export default componentQueries(query)(App);
-
-//https://github.com/reduction-admin/react-reduction.git
