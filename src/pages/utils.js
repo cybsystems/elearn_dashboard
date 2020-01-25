@@ -1,4 +1,5 @@
 import { showToast } from '../helpers/toasts';
+import { baseUrl } from '../global';
 
 export const getCardItems = async () => {
   try {
@@ -21,7 +22,7 @@ export const getCardItems = async () => {
       color: '#01a65b',
       goto: '/resource',
     };
-    const cardResponse = await fetch('http://localhost/getDashboardInfo.php')
+    const cardResponse = await fetch(`${baseUrl}/getDashboardInfo.php`)
       .then(res => res.json())
       .then(res => res);
     const cards = cardResponse.res;
